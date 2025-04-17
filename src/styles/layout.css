@@ -1,0 +1,129 @@
+:root {
+  --header-height: 60px;
+  --footer-height: 40px;
+  --sidebar-width: 240px;
+  --properties-width: 280px;
+  --toolbar-gap: 8px;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.app-header {
+  height: var(--header-height);
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.app-sidebar {
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  padding: 16px;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--toolbar-gap);
+}
+
+.tool-button {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-easing);
+}
+
+.tool-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.app-main {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.properties-panel {
+  width: var(--properties-width);
+  border-left: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  padding: 16px;
+}
+
+.panel-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.app-footer {
+  height: var(--footer-height);
+  border-top: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .properties-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-sidebar {
+    display: none;
+  }
+}

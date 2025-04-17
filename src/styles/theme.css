@@ -1,0 +1,113 @@
+/* Base theme variables */
+:root {
+  /* Light theme colors */
+  --bg-light: #ffffff;
+  --text-light: #1a1a1a;
+  --surface-light: #f5f5f5;
+  --border-light: #e0e0e0;
+
+  /* Dark theme colors */
+  --bg-dark: #1a1a1a;
+  --text-dark: #ffffff;
+  --surface-dark: #2d2d2d;
+  --border-dark: #404040;
+
+  /* Accent colors */
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-orange: #f59e0b;
+
+  /* Transitions */
+  --transition-speed: 200ms;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme application */
+[data-theme='light'] {
+  --bg-color: var(--bg-light);
+  --text-color: var(--text-light);
+  --surface-color: var(--surface-light);
+  --border-color: var(--border-light);
+}
+
+[data-theme='dark'] {
+  --bg-color: var(--bg-dark);
+  --text-color: var(--text-dark);
+  --surface-color: var(--surface-dark);
+  --border-color: var(--border-dark);
+}
+
+/* Accent color application */
+[data-accent='blue'] { --accent-color: var(--accent-blue); }
+[data-accent='purple'] { --accent-color: var(--accent-purple); }
+[data-accent='green'] { --accent-color: var(--accent-green); }
+[data-accent='orange'] { --accent-color: var(--accent-orange); }
+
+/* Global transitions */
+* {
+  transition: background-color var(--transition-speed) var(--transition-easing),
+              color var(--transition-speed) var(--transition-easing),
+              border-color var(--transition-speed) var(--transition-easing);
+}
+
+/* Animation classes */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn var(--transition-speed) var(--transition-easing) forwards;
+}
+
+.slide-in {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideIn var(--transition-speed) var(--transition-easing) forwards;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Component-specific styles */
+.form-field-editor {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.toolbar {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.button {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: transform 150ms var(--transition-easing);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.tooltip {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

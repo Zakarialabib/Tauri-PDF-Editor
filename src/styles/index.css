@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Import existing styles */
+@import './theme.css';
+@import './layout.css';
+
+/* Custom styles that extend Tailwind */
+@layer components {
+  .title-bar {
+    @apply flex items-center h-10 bg-[#1e1f22] select-none;
+  }
+  
+  .window-control-button {
+    @apply h-10 w-12 flex items-center justify-center;
+  }
+  
+  .window-control-button-minimize {
+    @apply hover:bg-[#36373d];
+  }
+  
+  .window-control-button-maximize {
+    @apply hover:bg-[#36373d];
+  }
+  
+  .window-control-button-close {
+    @apply hover:bg-red-500;
+  }
+  
+  .sidebar-panel {
+    @apply mb-2 border border-[#2b2d31] rounded;
+  }
+  
+  .sidebar-panel-header {
+    @apply w-full flex items-center p-2 bg-[#2b2d31] text-left;
+  }
+  
+  .sidebar-panel-content {
+    @apply p-2 bg-[#1e1f22];
+  }
+  
+  .tool-button {
+    @apply p-2 bg-[#36373d] hover:bg-[#404249] rounded text-sm;
+  }
+} 
