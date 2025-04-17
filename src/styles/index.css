@@ -7,7 +7,7 @@
 /* Custom styles that extend Tailwind */
 @layer components {
   .title-bar {
-    @apply flex items-center h-10 bg-[#1e1f22] select-none;
+    @apply flex items-center justify-center h-10 text-base font-medium select-none;
   }
   
   .window-control-button {
@@ -25,20 +25,47 @@
   .window-control-button-close {
     @apply hover:bg-red-500;
   }
+
+    .toolbar {
+    @apply flex items-center p-1 space-x-2 bg-gray-100 rounded;
+  }
+
+  .toolbar-button {
+    @apply p-1 bg-gray-200 hover:bg-gray-300 rounded text-sm flex items-center;
+  }
+
+  .toolbar-button svg {
+    @apply w-4 h-4; /* Reduced icon size */
+  }
+
   
   .sidebar-panel {
-    @apply mb-2 border border-[#2b2d31] rounded;
+    @apply mb-1;
   }
   
   .sidebar-panel-header {
-    @apply w-full flex items-center p-2 bg-[#2b2d31] text-left;
+    @apply w-full flex items-center p-1 text-left hover:bg-gray-200;
   }
   
   .sidebar-panel-content {
-    @apply p-2 bg-[#1e1f22];
+    @apply p-1;
   }
   
-  .tool-button {
-    @apply p-2 bg-[#36373d] hover:bg-[#404249] rounded text-sm;
+    .file-info {
+    @apply px-2 py-1 bg-gray-200 rounded;
   }
-} 
+
+  .file-name {
+    @apply text-xs;
+  }
+  
+    .tool-button {
+    @apply p-1 bg-gray-200 hover:bg-gray-300 rounded text-sm ;
+  }
+  .sidebar-thumbnails img{
+    @apply bg-transparent;
+  }
+  .sidebar-thumbnails {
+    @apply gap-1
+  }
+}

@@ -5,8 +5,11 @@ import { readFile } from '@tauri-apps/plugin-fs';
 import { PdfDocument, PdfPage } from '../lib/commands';
 import { FormElementRenderer } from './FormElementRenderer';
 
-// Initialize PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Set the worker path to use the local version from pdfjs-dist
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
 
 interface FormField {
   id: string;
@@ -76,14 +79,13 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
 
         let pdfData;
         
-        // Check if the path is a web URL (starts with http or /)
         if (pdfPath.startsWith('http') || pdfPath.startsWith('/')) {
-          // For web URLs or relative paths, use fetch
+          // For web URLs or relative paths
           const response = await fetch(pdfPath);
           const arrayBuffer = await response.arrayBuffer();
           pdfData = new Uint8Array(arrayBuffer);
         } else {
-          // For local files, use Tauri's readFile
+          // For local files
           pdfData = await readFile(pdfPath);
         }
         
@@ -145,24 +147,18 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
       try {
         setLoading(true);
         
-        // Get the page
         const page = await pdfDoc.getPage(currentPage);
-        
-        // Set up canvas
         const canvas = canvasRef.current!;
         const context = canvas.getContext('2d')!;
         
-        // Calculate viewport with rotation
         const viewport = page.getViewport({ 
           scale: currentScale,
           rotation: currentRotation
         });
         
-        // Set canvas dimensions
         canvas.height = viewport.height;
         canvas.width = viewport.width;
         
-        // Render the page
         const renderContext = {
           canvasContext: context,
           viewport: viewport,
@@ -170,9 +166,7 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
         
         await page.render(renderContext).promise;
 
-        // Notify parent of page dimensions
         if (onPageDimensionsChange) {
-          // Get original page dimensions (unscaled)
           const originalViewport = page.getViewport({ scale: 1.0, rotation: 0 });
           onPageDimensionsChange(originalViewport.width, originalViewport.height);
         }
@@ -236,13 +230,11 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
   };
 
   const handleCanvasClick = (e: React.MouseEvent) => {
-    // Deselect all fields when clicking on the canvas
     if (onFieldSelect && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
-      // Check if we clicked on a field
       const clickedField = formFields.find(field => 
         field.page === currentPage &&
         x >= field.x && x <= field.x + field.width &&
@@ -250,7 +242,6 @@ const PdfViewer: React.FC<PdfViewerProps> = ({
       );
       
       if (!clickedField) {
-        // If we didn't click on a field, deselect all
         onFieldSelect(null as any);
       }
     }

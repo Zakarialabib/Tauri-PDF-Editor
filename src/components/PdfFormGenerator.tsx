@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useFormElements } from '../contexts/FormElementContext';
 import { useFormData } from '../contexts/FormDataContext';
-import { PdfFormFieldGenerator } from '../lib/PdfFormFieldGenerator';
-import { save } from '@tauri-apps/plugin-dialog';
+import { PdfFormFieldGenerator } from '../lib/PdfFormFieldGenerator'
+// import { Store } from '@tauri-apps/plugin-store';
 
+// const save = new Store('.store.config');
 interface PdfFormGeneratorProps {
   pdfPath: string;
 }
@@ -29,31 +30,32 @@ export const PdfFormGenerator: React.FC<PdfFormGeneratorProps> = ({ pdfPath }) =
         return;
       }
 
-      // Ask user where to save the PDF
-      const savePath = await save({
-        filters: [{
-          name: 'PDF Files',
-          extensions: ['pdf']
-        }]
-      });
 
-      if (!savePath) {
-        setIsGenerating(false);
-        return; // User cancelled
-      }
+      // Ask user where to save the PDF
+      // const savePath = await window.__TAURI__.dialog.save({
+      //   filters: [{
+      //     name: 'PDF Files',
+      //     extensions: ['pdf']
+      //   }],
+      // });
+
+      // if (!savePath) {
+      //   setIsGenerating(false);
+      //   return; // User cancelled
+      // }
 
       // Generate form fields and add them to the PDF
-      await PdfFormFieldGenerator.generateFormFields(
-        elements,
-        pdfPath,
-        savePath
-      );
+      // await PdfFormFieldGenerator.generateFormFields(
+      //   elements,
+      //   pdfPath,
+      //   savePath
+      // );
 
-      // Generate appearance streams
-      await PdfFormFieldGenerator.generateAppearanceStreams(
-        savePath,
-        savePath
-      );
+      // // Generate appearance streams
+      // await PdfFormFieldGenerator.generateAppearanceStreams(
+      //   savePath,
+      //   savePath
+      // );
 
       setSuccess('PDF form generated successfully!');
     } catch (err) {

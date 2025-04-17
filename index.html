@@ -9,6 +9,13 @@
 
   <body>
     <div id="root"></div>
+    <script type="module">
+      // Import pdfjsLib from the local pdf.mjs file.
+      import * as pdfjsLib from './node_modules/pdfjs-dist/build/pdf.mjs';
+      
+      // Set the workerSrc to the local pdf.worker.mjs file.
+      pdfjsLib.GlobalWorkerOptions.workerSrc = './node_modules/pdfjs-dist/build/pdf.worker.mjs';
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
